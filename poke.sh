@@ -42,7 +42,7 @@ if [[ -f "${POKEDIR}/${DIFF_FILE}" ]]; then
     #and move the temp file over
     if [[ ! -z ${testStr} ]]; then
         for elem in "${@}"; do
-            echo -en "Update detected from this site:\n${testStr}\n" | mail -s "Update from ${URL}" "${elem}"
+            echo -en "Update detected from this site:\n${URL}\n\n${testStr}\n" | mail -s "Update from ${URL}" "${elem}"
             echo "Email sent to ${elem}"
         done
         mv "${POKEDIR}/${TEMP_FILE}" "${POKEDIR}/${DIFF_FILE}"
