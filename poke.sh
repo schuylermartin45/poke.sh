@@ -41,8 +41,10 @@ if [[ -f "${POKEDIR}/${DIFF_FILE}" ]]; then
     #If the test string is not empty, there are differences. Alert the user(s) and
     #and move the temp file over
     if [[ ! -z ${testStr} ]]; then
-        mail -s "Update from ${URL}" "${@}" < "Update detected from this site.\n EOF"
-        echo "Email sent"
+        for elem in "${@}"; do
+            echo "Update detected from this site." | mail -s "Update from ${URL}" "${elem}"
+            echo "Email sent to ${elem}"
+        done
         mv "${POKEDIR}/${TEMP_FILE}" "${POKEDIR}/${DIFF_FILE}"
     else
         rm "${POKEDIR}/${TEMP_FILE}"
